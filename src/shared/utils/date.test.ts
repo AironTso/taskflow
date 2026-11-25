@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect } from "vitest";
 import { formatDate, formatRelativeDate, isOverdue, isDueSoon, getPriorityColor, getPriorityLabel, generateId } from "./date";
 
 describe("date utils", () => {
@@ -12,9 +12,9 @@ describe("date utils", () => {
       expect(formatDate(today)).toBe("Hoje");
     });
 
-    it("returns Amanhã for tomorrow", () => {
+    it("returns AmanhÃ£ for tomorrow", () => {
       const tomorrow = new Date(Date.now() + 86400000).toISOString().split("T")[0];
-      expect(formatDate(tomorrow)).toBe("Amanhã");
+      expect(formatDate(tomorrow)).toBe("AmanhÃ£");
     });
   });
 
@@ -70,7 +70,7 @@ describe("date utils", () => {
   describe("getPriorityLabel", () => {
     it("returns Portuguese labels", () => {
       expect(getPriorityLabel("low")).toBe("Baixa");
-      expect(getPriorityLabel("medium")).toBe("Média");
+      expect(getPriorityLabel("medium")).toBe("MÃ©dia");
       expect(getPriorityLabel("high")).toBe("Alta");
       expect(getPriorityLabel("urgent")).toBe("Urgente");
     });

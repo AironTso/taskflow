@@ -1,4 +1,4 @@
-import { TaskList } from "../features/tasks/components/TaskList";
+import { TaskList } from "@/features/tasks/components/TaskList";
 
 export function Tasks() {
   return (

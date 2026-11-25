@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { X, Save, Tag } from "lucide-react";
-import { Modal } from "../../../../shared/components/Modal";
-import { Button } from "../../../../shared/components/Button";
-import { Input } from "../../../../shared/components/Input";
-import { useTagStore } from "../../store/tagStore";
-import type { Tag } from "../../../../shared/types";
-import { tagSchema } from "../../../../shared/utils/validation";
+import { X, Save } from "lucide-react";
+import { Modal } from "@/shared/components/Modal";
+import { Button } from "@/shared/components/Button";
+import { Input } from "@/shared/components/Input";
+import { useTagStore } from "@/features/tags/store/tagStore";
+import type { Tag } from "@/shared/types";
+import { tagSchema } from "@/shared/utils/validation";
 
 const COLORS = [
   "#0ea5e9", "#22c55e", "#f59e0b", "#ef4444", "#a855f7",
@@ -103,7 +103,7 @@ export function TagForm({ isOpen, onClose, tag }: TagFormProps) {
           </Button>
           <Button type="submit" variant="primary" loading={loading}>
             <Save className="h-4 w-4" />
-            {tag ? "Salvar alterações" : "Criar tag"}
+            {tag ? "Salvar alteraÃ§Ãµes" : "Criar tag"}
           </Button>
         </div>
       </form>

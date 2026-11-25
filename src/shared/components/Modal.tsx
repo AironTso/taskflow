@@ -1,4 +1,4 @@
-import { Fragment, ReactNode } from "react";
+import { ReactNode } from "react";
 import { X } from "lucide-react";
 import { createPortal } from "react-dom";
 
@@ -40,7 +40,7 @@ export function Modal({ isOpen, onClose, title, children, className = "", size =
           aria-modal="true"
           aria-labelledby={title ? "modal-title" : undefined}
         >
-          {(title || onClose) && (
+          {title && (
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700">
               {title && (
                 <h2 id="modal-title" className="text-lg font-semibold text-gray-900 dark:text-gray-100">
@@ -62,7 +62,9 @@ export function Modal({ isOpen, onClose, title, children, className = "", size =
     </div>
   );
 
-  if (typeof document === "undefined") return null;
+  // SSR check: window may not be available during server-side rendering
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  if (typeof window === "undefined") return null;
 
   return createPortal(modalContent, document.body);
 }

@@ -87,7 +87,10 @@ function ToastContainer({ toasts, onRemove }: { toasts: Toast[]; onRemove: (id: 
           `}
           role="alert"
         >
-          <icons[toast.type] className={`h-5 w-5 flex-shrink-0 mt-0.5 ${iconColors[toast.type]}`} />
+          {(() => {
+            const Icon = icons[toast.type];
+            return <Icon className={`h-5 w-5 flex-shrink-0 mt-0.5 ${iconColors[toast.type]}`} />;
+          })()}
           <p className="flex-1 text-sm">{toast.message}</p>
           <button
             onClick={() => onRemove(toast.id)}

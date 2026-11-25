@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import type { Tag } from "../../../../shared/types";
-import { generateId } from "../../../../shared/utils/date";
+import type { Tag } from "../../../shared/types";
+import { generateId } from "../../../shared/utils/date";
 
 interface TagState {
   tags: Tag[];

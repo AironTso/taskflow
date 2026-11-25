@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import type { Project } from "../../../../shared/types";
-import { generateId, getDefaultProject } from "../../../../shared/utils/date";
+import type { Project } from "../../../shared/types";
+import { generateId, getDefaultProject } from "../../../shared/utils/date";
 
 interface ProjectState {
   projects: Project[];

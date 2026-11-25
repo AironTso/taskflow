@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { Plus, Tag, Trash2, Edit2 } from "lucide-react";
-import { Button } from "../../../../shared/components/Button";
-import { Modal, ConfirmDialog } from "../../../../shared/components/Modal";
+import { Plus, Tag as TagIcon, Trash2, Edit2 } from "lucide-react";
+import { Button } from "@/shared/components/Button";
+import { ConfirmDialog } from "@/shared/components/Modal";
 import { TagForm } from "./TagForm";
-import { useTagStore } from "../../store/tagStore";
-import { useTaskStore } from "../../../../features/tasks/store/taskStore";
-import { useToast } from "../../../../shared/components/Toast";
-import type { Tag } from "../../../../shared/types";
+import { useTagStore } from "@/features/tags/store/tagStore";
+import { useTaskStore } from "@/features/tasks/store/taskStore";
+import { useToast } from "@/shared/components/Toast";
+import type { Tag } from "@/shared/types";
 
 export function TagList() {
-  const { tags, addTag, updateTag, deleteTag } = useTagStore();
+  const { tags, deleteTag } = useTagStore();
   const { tasks, updateTask } = useTaskStore();
   const { success } = useToast();
   const [showForm, setShowForm] = useState(false);
@@ -33,7 +33,7 @@ export function TagList() {
     });
     deleteTag(tag.id);
     setShowDeleteConfirm(null);
-    success(`Tag "${tag.name}" excluída.`);
+    success(`Tag "${tag.name}" excluÃ­da.`);
   };
 
   const handleCloseForm = () => {
@@ -64,7 +64,7 @@ export function TagList() {
                 className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
                 style={{ backgroundColor: `${tag.color}20` }}
               >
-                <Tag className="h-4 w-4" style={{ color: tag.color }} />
+                <TagIcon className="h-4 w-4" style={{ color: tag.color }} />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="font-medium text-gray-900 dark:text-gray-100 truncate">{tag.name}</p>

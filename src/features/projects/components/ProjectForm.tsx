@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { X, Save, Palette, Layout } from "lucide-react";
-import { Modal } from "../../../../shared/components/Modal";
-import { Button } from "../../../../shared/components/Button";
-import { Input } from "../../../../shared/components/Input";
-import { useProjectStore } from "../../store/projectStore";
-import type { Project } from "../../../../shared/types";
-import { projectSchema } from "../../../../shared/utils/validation";
+import { X, Save, Layout } from "lucide-react";
+import { Modal } from "@/shared/components/Modal";
+import { Button } from "@/shared/components/Button";
+import { Input } from "@/shared/components/Input";
+import { useProjectStore } from "@/features/projects/store/projectStore";
+import type { Project } from "@/shared/types";
+import { projectSchema } from "@/shared/utils/validation";
 
 const ICONS = [
   "folder", "briefcase", "home", "book", "code", "music", "dumbbell",
@@ -104,7 +104,7 @@ export function ProjectForm({ isOpen, onClose, project }: ProjectFormProps) {
         </div>
 
         <div>
-          <label className="label">Õcone</label>
+          <label className="label">√çcone</label>
           <div className="flex flex-wrap gap-2">
             {ICONS.map((icon) => (
               <button
@@ -118,7 +118,7 @@ export function ProjectForm({ isOpen, onClose, project }: ProjectFormProps) {
                     : "bg-gray-100 border-gray-200 text-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 hover:border-primary-300"
                   }
                 `}
-                aria-label={`Õcone ${icon}`}
+                aria-label={`√çcone ${icon}`}
                 aria-pressed={selectedIcon === icon}
               >
                 <IconRenderer name={icon} className="h-5 w-5" />
@@ -134,7 +134,7 @@ export function ProjectForm({ isOpen, onClose, project }: ProjectFormProps) {
           </Button>
           <Button type="submit" variant="primary" loading={loading}>
             <Save className="h-4 w-4" />
-            {project ? "Salvar alteraÁıes" : "Criar projeto"}
+            {project ? "Salvar altera√ß√µes" : "Criar projeto"}
           </Button>
         </div>
       </form>

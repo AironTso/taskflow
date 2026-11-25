@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { Moon, Sun, Monitor, Download, Upload, Trash2, RefreshCw } from "lucide-react";
-import { useTheme } from "../app/providers/ThemeProvider";
-import { useTaskStore } from "../features/tasks/store/taskStore";
-import { useProjectStore } from "../features/projects/store/projectStore";
-import { useTagStore } from "../features/tags/store/tagStore";
-import { Button } from "../shared/components/Button";
-import { Card } from "../shared/components/Card";
-import { Modal, ConfirmDialog } from "../shared/components/Modal";
-import { useToast } from "../shared/components/Toast";
+import { Moon, Sun, Monitor, Download, Trash2 } from "lucide-react";
+import { useTheme } from "@/app/providers/ThemeProvider";
+import { useTaskStore } from "@/features/tasks/store/taskStore";
+import { useProjectStore } from "@/features/projects/store/projectStore";
+import { useTagStore } from "@/features/tags/store/tagStore";
+import { Button } from "@/shared/components/Button";
+import { Card } from "@/shared/components/Card";
+import { ConfirmDialog } from "@/shared/components/Modal";
+import { useToast } from "@/shared/components/Toast";
 
 export function Settings() {
   const { theme, setTheme, resolvedTheme } = useTheme();
@@ -16,12 +16,10 @@ export function Settings() {
   const { tags, loadFromStorage: loadTags } = useTagStore();
   const { success, error } = useToast();
   const [showResetConfirm, setShowResetConfirm] = useState(false);
-  const [exportData, setExportData] = useState("");
 
   const handleExport = () => {
     const data = { tasks, projects, tags, exportedAt: new Date().toISOString() };
     const json = JSON.stringify(data, null, 2);
-    setExportData(json);
     const blob = new Blob([json], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -47,7 +45,7 @@ export function Settings() {
         loadTags();
         success("Dados importados com sucesso!");
       } catch {
-        error("Arquivo inválido");
+        error("Arquivo invÃ¡lido");
       }
     };
     reader.readAsText(file);
@@ -70,14 +68,14 @@ export function Settings() {
   return (
     <div className="max-w-2xl space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Configurações</h1>
-        <p className="text-gray-500 dark:text-gray-400 mt-1">Personalize sua experiência</p>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">ConfiguraÃ§Ãµes</h1>
+        <p className="text-gray-500 dark:text-gray-400 mt-1">Personalize sua experiÃªncia</p>
       </div>
 
       <Card className="p-6">
         <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
           <Monitor className="h-5 w-5" />
-          Aparência
+          AparÃªncia
         </h2>
         <div className="grid grid-cols-3 gap-3">
           {[
@@ -87,7 +85,7 @@ export function Settings() {
           ].map(({ value, label, icon: Icon }) => (
             <button
               key={value}
-              onClick={() => setTheme(value)}
+              onClick={() => setTheme(value as "light" | "dark" | "system")}
               className={`
                 p-4 rounded-xl border-2 transition-all text-left
                 ${theme === value
@@ -135,8 +133,8 @@ export function Settings() {
           Zona de Perigo
         </h2>
         <p className="text-gray-500 dark:text-gray-400 mb-4">
-          Esta ação apagará <strong>todos os seus dados</strong> (tarefas, projetos, tags) e restaurará as configurações padrão.
-          Esta ação <strong>não pode ser desfeita</strong>.
+          Esta aÃ§Ã£o apagarÃ¡ <strong>todos os seus dados</strong> (tarefas, projetos, tags) e restaurarÃ¡ as configuraÃ§Ãµes padrÃ£o.
+          Esta aÃ§Ã£o <strong>nÃ£o pode ser desfeita</strong>.
         </p>
         <Button variant="danger" onClick={() => setShowResetConfirm(true)} className="w-full">
           <Trash2 className="h-4 w-4" />
@@ -145,7 +143,7 @@ export function Settings() {
       </Card>
 
       <Card className="p-6">
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Estatísticas</h2>
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">EstatÃ­sticas</h2>
         <dl className="grid grid-cols-2 gap-4 text-sm">
           <div>
             <dt className="text-gray-500 dark:text-gray-400">Tarefas</dt>
@@ -171,7 +169,7 @@ export function Settings() {
         onClose={() => setShowResetConfirm(false)}
         onConfirm={handleReset}
         title="Confirmar reset total"
-        message="Tem certeza absoluta? Todos os seus dados serão perdidos permanentemente."
+        message="Tem certeza absoluta? Todos os seus dados serÃ£o perdidos permanentemente."
         confirmText="Sim, apagar tudo"
         variant="danger"
       />

@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { useLocalStorage } from "../../shared/hooks/useLocalStorage";
-import { useMediaQuery } from "../../shared/hooks/useLocalStorage";
+import { useLocalStorage } from "@/shared/hooks/useLocalStorage";
+import { useMediaQuery } from "@/shared/hooks/useLocalStorage";
 
 type Theme = "light" | "dark" | "system";
 

@@ -1,4 +1,4 @@
-import { TagList } from "../features/tags/components/TagList";
+import { TagList } from "@/features/tags/components/TagList";
 
 export function Tags() {
   return (

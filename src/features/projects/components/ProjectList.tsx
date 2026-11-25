@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { Plus, Folder, Trash2, Edit2, MoreVertical } from "lucide-react";
-import { Button } from "../../../../shared/components/Button";
-import { Modal, ConfirmDialog } from "../../../../shared/components/Modal";
+import { Plus, Folder, Trash2, Edit2 } from "lucide-react";
+import { Button } from "@/shared/components/Button";
+import { ConfirmDialog } from "@/shared/components/Modal";
 import { ProjectForm } from "./ProjectForm";
-import { useProjectStore } from "../../store/projectStore";
-import { useTaskStore } from "../../../../features/tasks/store/taskStore";
-import { useToast } from "../../../../shared/components/Toast";
-import type { Project } from "../../../../shared/types";
+import { useProjectStore } from "@/features/projects/store/projectStore";
+import { useTaskStore } from "@/features/tasks/store/taskStore";
+import { useToast } from "@/shared/components/Toast";
+import type { Project } from "@/shared/types";
 
 export function ProjectList() {
-  const { projects, addProject, updateProject, deleteProject } = useProjectStore();
+  const { projects, deleteProject } = useProjectStore();
   const { tasks, updateTask } = useTaskStore();
   const { success } = useToast();
   const [showForm, setShowForm] = useState(false);
@@ -21,17 +21,12 @@ export function ProjectList() {
     setShowForm(true);
   };
 
-  const handleEdit = (project: Project) => {
-    setEditingProject(project);
-    setShowForm(true);
-  };
-
   const handleDelete = (project: Project) => {
     const projectTasks = tasks.filter((t) => t.projectId === project.id);
     projectTasks.forEach((task) => updateTask(task.id, { projectId: "default" }));
     deleteProject(project.id);
     setShowDeleteConfirm(null);
-    success(`Projeto "${project.name}" excluído. Tarefas movidas para "Geral".`);
+    success(`Projeto "${project.name}" excluÃ­do. Tarefas movidas para "Geral".`);
   };
 
   const handleCloseForm = () => {
@@ -114,7 +109,7 @@ export function ProjectList() {
           onClose={() => setShowDeleteConfirm(null)}
           onConfirm={() => handleDelete(showDeleteConfirm!)}
           title="Excluir projeto"
-          message={`Tem certeza que deseja excluir "${showDeleteConfirm.name}"? As tarefas serão movidas para "Geral".`}
+          message={`Tem certeza que deseja excluir "${showDeleteConfirm.name}"? As tarefas serÃ£o movidas para "Geral".`}
           confirmText="Excluir"
           variant="danger"
         />

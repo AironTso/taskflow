@@ -1,9 +1,8 @@
 import { CheckCircle2, Circle, AlertTriangle, Clock, TrendingUp, Target } from "lucide-react";
-import { useTaskStore } from "../features/tasks/store/taskStore";
-import { useProjectStore } from "../features/projects/store/projectStore";
-import { formatDate, isOverdue, isDueSoon } from "../shared/utils/date";
-import { Card } from "../shared/components/Card";
-import { Button } from "../shared/components/Button";
+import { useTaskStore } from "@/features/tasks/store/taskStore";
+import { useProjectStore } from "@/features/projects/store/projectStore";
+import { formatDate, isOverdue, isDueSoon } from "@/shared/utils/date";
+import { Button } from "@/shared/components/Button";
 
 export function Dashboard() {
   const { tasks, getTaskStats } = useTaskStore();
@@ -38,7 +37,7 @@ export function Dashboard() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Dashboard</h1>
-        <p className="text-gray-500 dark:text-gray-400 mt-1">Vis„o geral da sua produtividade</p>
+        <p className="text-gray-500 dark:text-gray-400 mt-1">Vis√£o geral da sua produtividade</p>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -55,7 +54,7 @@ export function Dashboard() {
           color="blue"
         />
         <StatCard
-          title="ConcluÌdas"
+          title="Conclu√≠das"
           value={stats.completed}
           icon={CheckCircle2}
           color="green"
@@ -113,7 +112,7 @@ export function Dashboard() {
         </div>
 
         <div className="card p-6">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">PrÛximos Prazos</h2>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Pr√≥ximos Prazos</h2>
           <div className="space-y-3">
             <DeadlineItem label="Hoje" count={dueToday} icon={Clock} color="blue" />
             <DeadlineItem label="Esta semana" count={dueThisWeek} icon={TrendingUp} color="purple" />
@@ -200,7 +199,7 @@ function PriorityBar({ priority, count, total }: { priority: string; count: numb
     high: "bg-orange-400",
     urgent: "bg-red-400",
   };
-  const labels = { low: "Baixa", medium: "MÈdia", high: "Alta", urgent: "Urgente" };
+  const labels = { low: "Baixa", medium: "M√©dia", high: "Alta", urgent: "Urgente" };
   const percentage = total > 0 ? (count / total) * 100 : 0;
 
   return (

@@ -1,12 +1,13 @@
 import { format, isToday, isTomorrow, isPast, parseISO, differenceInDays } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import type { Project, Priority, TaskStatus } from "../types";
 
 export function formatDate(dateString: string | null): string {
   if (!dateString) return "";
   try {
     const date = parseISO(dateString);
     if (isToday(date)) return "Hoje";
-    if (isTomorrow(date)) return "Amanh„";
+    if (isTomorrow(date)) return "Amanh√£";
     return format(date, "dd/MM/yyyy", { locale: ptBR });
   } catch {
     return dateString;
@@ -20,7 +21,7 @@ export function formatRelativeDate(dateString: string | null): string {
     const diff = differenceInDays(date, new Date());
     if (diff < 0) return `Atrasado ${Math.abs(diff)} dia${Math.abs(diff) > 1 ? "s" : ""}`;
     if (diff === 0) return "Vence hoje";
-    if (diff === 1) return "Vence amanh„";
+    if (diff === 1) return "Vence amanh√£";
     return `Vence em ${diff} dias`;
   } catch {
     return dateString;
@@ -61,7 +62,7 @@ export function getPriorityColor(priority: string): string {
 export function getPriorityLabel(priority: string): string {
   switch (priority) {
     case "low": return "Baixa";
-    case "medium": return "MÈdia";
+    case "medium": return "M√©dia";
     case "high": return "Alta";
     case "urgent": return "Urgente";
     default: return priority;
@@ -84,12 +85,12 @@ export function getDefaultProject(): Project {
 
 export const PRIORITY_OPTIONS: { value: Priority; label: string }[] = [
   { value: "low", label: "Baixa" },
-  { value: "medium", label: "MÈdia" },
+  { value: "medium", label: "M√©dia" },
   { value: "high", label: "Alta" },
   { value: "urgent", label: "Urgente" },
 ];
 
 export const STATUS_OPTIONS: { value: TaskStatus; label: string }[] = [
   { value: "pending", label: "Pendente" },
-  { value: "completed", label: "ConcluÌda" },
+  { value: "completed", label: "Conclu√≠da" },
 ];

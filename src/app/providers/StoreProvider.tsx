@@ -1,10 +1,10 @@
 import { createContext, useContext, ReactNode, useEffect } from "react";
-import { useStore } from "../../features/tasks/store/taskStore";
-import { useProjectStore } from "../../features/projects/store/projectStore";
-import { useTagStore } from "../../features/tags/store/tagStore";
+import { useTaskStore } from "@/features/tasks/store/taskStore";
+import { useProjectStore } from "@/features/projects/store/projectStore";
+import { useTagStore } from "@/features/tags/store/tagStore";
 
 interface StoreContextValue {
-  tasks: ReturnType<typeof useStore>;
+  tasks: ReturnType<typeof useTaskStore>;
   projects: ReturnType<typeof useProjectStore>;
   tags: ReturnType<typeof useTagStore>;
 }
@@ -12,7 +12,7 @@ interface StoreContextValue {
 const StoreContext = createContext<StoreContextValue | null>(null);
 
 export function StoreProvider({ children }: { children: ReactNode }) {
-  const tasks = useStore();
+  const tasks = useTaskStore();
   const projects = useProjectStore();
   const tags = useTagStore();
 

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import type { Task, Priority, TaskStatus } from "../../../../shared/types";
-import { generateId } from "../../../../shared/utils/date";
+import type { Task, Priority, TaskStatus } from "../../../shared/types";
+import { generateId } from "../../../shared/utils/date";
 
 interface TaskState {
   tasks: Task[];
@@ -129,14 +129,14 @@ export const useTaskStore = create<TaskState>()(
         }
 
         filtered.sort((a, b) => {
-          let aVal: string | number = a[filter.sortBy];
-          let bVal: string | number = b[filter.sortBy];
+          let aVal: string | number = a[filter.sortBy] as string | number;
+          let bVal: string | number = b[filter.sortBy] as string | number;
           if (filter.sortBy === "priority") {
             const priorityOrder = { low: 0, medium: 1, high: 2, urgent: 3 };
             aVal = priorityOrder[a.priority];
             bVal = priorityOrder[b.priority];
           }
-          if (typeof aVal === "string") {
+          if (typeof aVal === "string" && typeof bVal === "string") {
             aVal = aVal.toLowerCase();
             bVal = bVal.toLowerCase();
           }

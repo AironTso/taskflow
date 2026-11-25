@@ -1,11 +1,11 @@
-import { CheckCircle2, MoreVertical, Trash2, Edit2, Flag, Calendar, Tag } from "lucide-react";
-import { formatRelativeDate, isOverdue, getPriorityColor, getPriorityLabel } from "../../../../shared/utils/date";
-import type { Task } from "../../../../shared/types";
-import { Button } from "../../../../shared/components/Button";
-import { Modal, ConfirmDialog } from "../../../../shared/components/Modal";
-import { useTaskStore } from "../../store/taskStore";
-import { useProjectStore } from "../../../../features/projects/store/projectStore";
-import { useTagStore } from "../../../../features/tags/store/tagStore";
+import { useState } from "react";
+import { CheckCircle2, MoreVertical, Trash2, Edit2, Flag, Calendar, Tag as TagIcon } from "lucide-react";
+import { formatRelativeDate, isOverdue, getPriorityColor, getPriorityLabel } from "@/shared/utils/date";
+import type { Task } from "@/shared/types";
+import { ConfirmDialog } from "@/shared/components/Modal";
+import { useTaskStore } from "@/features/tasks/store/taskStore";
+import { useProjectStore } from "@/features/projects/store/projectStore";
+import { useTagStore } from "@/features/tags/store/tagStore";
 
 interface TaskItemProps {
   task: Task;
@@ -42,7 +42,7 @@ export function TaskItem({ task, onEdit }: TaskItemProps) {
               : "border-gray-300 dark:border-gray-600 hover:border-primary-400"
             }
           `}
-          aria-label={task.status === "completed" ? "Marcar como pendente" : "Marcar como concluída"}
+          aria-label={task.status === "completed" ? "Marcar como pendente" : "Marcar como concluÃ­da"}
         >
           {task.status === "completed" && <CheckCircle2 className="h-4 w-4" />}
         </button>
@@ -59,7 +59,7 @@ export function TaskItem({ task, onEdit }: TaskItemProps) {
               <button
                 onClick={() => setShowMenu(!showMenu)}
                 className="p-1 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors opacity-0 group-hover:opacity-100"
-                aria-label="Mais opções"
+                aria-label="Mais opÃ§Ãµes"
               >
                 <MoreVertical className="h-4 w-4" />
               </button>
@@ -103,7 +103,7 @@ export function TaskItem({ task, onEdit }: TaskItemProps) {
                 className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium"
                 style={{ backgroundColor: `${tag!.color}20`, color: tag!.color }}
               >
-                <Tag className="h-3 w-3" />
+                <TagIcon className="h-3 w-3" />
                 {tag!.name}
               </span>
             ))}
@@ -133,12 +133,10 @@ export function TaskItem({ task, onEdit }: TaskItemProps) {
         onClose={() => setShowDeleteConfirm(false)}
         onConfirm={handleDelete}
         title="Excluir tarefa"
-        message={`Tem certeza que deseja excluir "${task.title}"? Esta ação não pode ser desfeita.`}
+        message={`Tem certeza que deseja excluir "${task.title}"? Esta aÃ§Ã£o nÃ£o pode ser desfeita.`}
         confirmText="Excluir"
         variant="danger"
       />
     </div>
   );
 }
-
-import { useState } from "react";

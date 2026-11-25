@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
-import { X, Save, Calendar, Tag, Folder, Flag } from "lucide-react";
-import { Modal } from "../../../../shared/components/Modal";
-import { Button } from "../../../../shared/components/Button";
-import { Input } from "../../../../shared/components/Input";
-import { Textarea } from "../../../../shared/components/Textarea";
-import { Select } from "../../../../shared/components/Select";
-import { useTaskStore } from "../../store/taskStore";
-import { useProjectStore } from "../../../../features/projects/store/projectStore";
-import { useTagStore } from "../../../../features/tags/store/tagStore";
-import type { Task, Priority } from "../../../../shared/types";
-import { PRIORITY_OPTIONS } from "../../../../shared/utils/date";
-import { taskSchema } from "../../../../shared/utils/validation";
+import { X, Save, Calendar, Tag as TagIcon } from "lucide-react";
+import { Modal } from "@/shared/components/Modal";
+import { Button } from "@/shared/components/Button";
+import { Input } from "@/shared/components/Input";
+import { Textarea } from "@/shared/components/Textarea";
+import { Select } from "@/shared/components/Select";
+import { useTaskStore } from "@/features/tasks/store/taskStore";
+import { useProjectStore } from "@/features/projects/store/projectStore";
+import { useTagStore } from "@/features/tags/store/tagStore";
+import type { Task, Priority } from "@/shared/types";
+import { PRIORITY_OPTIONS } from "@/shared/utils/date";
+import { taskSchema } from "@/shared/utils/validation";
 
 interface TaskFormProps {
   isOpen: boolean;
@@ -112,7 +112,7 @@ export function TaskForm({ isOpen, onClose, task }: TaskFormProps) {
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <Input
-          label="Título *"
+          label="TÃ­tulo *"
           value={formData.title}
           onChange={(e) => handleChange("title", e.target.value)}
           error={errors.title}
@@ -122,7 +122,7 @@ export function TaskForm({ isOpen, onClose, task }: TaskFormProps) {
         />
 
         <Textarea
-          label="Descrição"
+          label="DescriÃ§Ã£o"
           value={formData.description}
           onChange={(e) => handleChange("description", e.target.value)}
           placeholder="Detalhes adicionais (opcional)"
@@ -173,7 +173,7 @@ export function TaskForm({ isOpen, onClose, task }: TaskFormProps) {
                   borderColor: formData.tagIds.includes(tag.id) ? tag.color : `${tag.color}40`,
                 }}
               >
-                <Tag className="h-3.5 w-3.5" />
+                <TagIcon className="h-3.5 w-3.5" />
                 {tag.name}
               </button>
             ))}
@@ -188,6 +188,7 @@ export function TaskForm({ isOpen, onClose, task }: TaskFormProps) {
               type="date"
               value={formData.dueDate}
               onChange={(e) => handleChange("dueDate", e.target.value)}
+              min={new Date().toISOString().split("T")[0]}
               className="input pl-10"
             />
           </div>
@@ -200,7 +201,7 @@ export function TaskForm({ isOpen, onClose, task }: TaskFormProps) {
           </Button>
           <Button type="submit" variant="primary" loading={loading}>
             <Save className="h-4 w-4" />
-            {task ? "Salvar alterações" : "Criar tarefa"}
+            {task ? "Salvar alteraÃ§Ãµes" : "Criar tarefa"}
           </Button>
         </div>
       </form>

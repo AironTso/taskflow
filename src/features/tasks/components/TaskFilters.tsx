@@ -1,17 +1,16 @@
-import { useDebounce } from "../../../../shared/hooks/useLocalStorage";
+import { useState } from "react";
 import { Search, Filter, X, ChevronDown } from "lucide-react";
-import { Button } from "../../../../shared/components/Button";
-import { Input } from "../../../../shared/components/Input";
-import { Select } from "../../../../shared/components/Select";
-import { useTaskStore } from "../../store/taskStore";
-import { useProjectStore } from "../../../../features/projects/store/projectStore";
-import { PRIORITY_OPTIONS, STATUS_OPTIONS } from "../../../../shared/utils/date";
+import { Button } from "@/shared/components/Button";
+import { Input } from "@/shared/components/Input";
+import { Select } from "@/shared/components/Select";
+import { useTaskStore } from "@/features/tasks/store/taskStore";
+import { useProjectStore } from "@/features/projects/store/projectStore";
+import { PRIORITY_OPTIONS, STATUS_OPTIONS } from "@/shared/utils/date";
 
 export function TaskFilters() {
   const { filter, setFilter, clearFilters, getFilteredTasks } = useTaskStore();
   const { projects } = useProjectStore();
   const [search, setSearch] = useState(filter.search);
-  const debouncedSearch = useDebounce(search, 300);
 
   const hasActiveFilters =
     filter.status !== "all" ||
@@ -25,6 +24,16 @@ export function TaskFilters() {
   };
 
   const filteredTasks = getFilteredTasks();
+
+  const statusOptions = [
+    { value: "all", label: "Todos" },
+    ...STATUS_OPTIONS.map((s) => ({ value: s.value, label: s.label })),
+  ].reverse();
+
+  const priorityOptions = [
+    { value: "all", label: "Todas" },
+    ...PRIORITY_OPTIONS.map((p) => ({ value: p.value, label: p.label })),
+  ].reverse();
 
   return (
     <div className="card p-4">
@@ -42,15 +51,15 @@ export function TaskFilters() {
         <div className="flex flex-wrap items-center gap-3">
           <Select
             value={filter.status}
-            onChange={(e) => setFilter({ status: e.target.value as "all" | "pending" | "completed" })}
-            options={STATUS_OPTIONS.map((s) => ({ value: s.value, label: s.label })).concat([{ value: "all", label: "Todos" }]).reverse()}
+            onChange={(e) => setFilter({ status: e.target.value as any })}
+            options={statusOptions}
             className="w-36"
           />
 
           <Select
             value={filter.priority}
-            onChange={(e) => setFilter({ priority: e.target.value as "all" | "low" | "medium" | "high" | "urgent" })}
-            options={PRIORITY_OPTIONS.map((p) => ({ value: p.value, label: p.label })).concat([{ value: "all", label: "Todas" }]).reverse()}
+            onChange={(e) => setFilter({ priority: e.target.value as any })}
+            options={priorityOptions}
             className="w-36"
           />
 
@@ -68,7 +77,7 @@ export function TaskFilters() {
               { value: "createdAt", label: "Criadas" },
               { value: "dueDate", label: "Vencimento" },
               { value: "priority", label: "Prioridade" },
-              { value: "title", label: "Alfabética" },
+              { value: "title", label: "AlfabÃ©tica" },
             ]}
             className="w-36"
           />
@@ -103,5 +112,3 @@ export function TaskFilters() {
     </div>
   );
 }
-
-import { useState } from "react";
